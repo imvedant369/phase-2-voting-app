@@ -40,6 +40,29 @@ kubectl create -f k8s-specifications/
 
 The `vote` web app is then available on port 31000 on each host of the cluster, the `result` web app is available on port 31001.
 
+### Accessing the app with Minikube
+
+Start Minikube if it is not already running:
+
+```bash
+minikube start
+```
+
+Open the Vote application:
+
+```bash
+minikube service vote --url
+```
+
+Open the Result application in a separate command:
+
+```bash
+minikube service result --url
+```
+
+Copy each URL into your browser to access the application. Keep the terminal session open while using the URLs if Minikube provides a local tunnel.
+
+
 To remove them, run:
 
 ```shell
@@ -53,7 +76,7 @@ kubectl delete -f k8s-specifications/
 * A front-end web app in [Python](/vote) which lets you vote between two options
 * A [Redis](https://hub.docker.com/_/redis/) which collects new votes
 * A [.NET](/worker/) worker which consumes votes and stores them in…
-* A [Postgres](https://hub.docker.com/_/postgres/) database backed by a Docker volume
+* A Postgres database using temporary Kubernetes emptyDir storage
 * A [Node.js](/result) web app which shows the results of the voting in real time
 
 ## Notes
